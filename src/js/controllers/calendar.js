@@ -4,6 +4,8 @@ class Controller {
     constructor(selector) {
         this.selector = selector;
         this.options = selector.options
+        this.target = selector.target
+        this.body = selector.template.body
 
         this.addTargetListener()
         this.initNextMonthButton();
@@ -12,6 +14,7 @@ class Controller {
         this.initPrevYearButton();
         this.initCancelButton();
         this.initCalendarItems();
+        this.addClickListener()
     }
 
     addTargetListener(){
@@ -58,14 +61,22 @@ class Controller {
 
     initCalendarItems() {
         this.selector.template.calendarContent.addEventListener('click', (e) => {
-            if(e.target.classList[2] == 'this' && e.target.classList[3] == 'optional'){
+            if(e.target.classList.contains('this') && e.target.classList.contains('optional') ){
                 this.selector.selectDate(e.target.innerHTML)
             }
-            if(e.target.classList[2] == 'prev' && this.selector.template.control.prev_month == true){
+            if(e.target.classList.contains('prev') && this.selector.template.control.prev_month == true){
                 this.selector.changeCalender('prevMonth', this.options);
             }
-            if(e.target.classList[2] == 'next' && this.selector.template.control.next_month == true){
+            if(e.target.classList.contains('next') && this.selector.template.control.next_month == true){
                 this.selector.changeCalender('nextMonth', this.options);
+            }
+        });
+    }
+
+    addClickListener() {
+        document.addEventListener('click', (e) => {
+            if(e.path.indexOf(this.body) < 0 && e.path.indexOf(this.target) < 0){
+                this.selector.hideCalendar()
             }
         });
     }

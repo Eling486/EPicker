@@ -214,18 +214,22 @@ class ESelector {
             if (this.options.rules_data !== null) {
                 var target_arr = utils.timeToStr(targetDate).split('-')
                 var date_arr = []
-                //var date_item = []
+                var date_item = []
                 for (var i = 0; i < this.options.rules_data.length; i++) {
                     var data_arr = this.options.rules_data[i].date.split('-')
                     if (parseInt(data_arr[0]) == target_arr[0] && parseInt(data_arr[1]) == target_arr[1]) {
                         date_arr.push(parseInt(data_arr[2]))
-                        //date_item.push(this.options.rules_data[i])
+                        date_item.push(this.options.rules_data[i])
                     }
                 }
                 for (var j = 0; j < calendar.length; j++) {
                     for (var i = 0; i < calendar[j].length; i++) {
-                        if (date_arr.indexOf(calendar[j][i].date) >= 0 && calendar[j][i].class.indexOf('this') >= 0) {
+                        var arr_index = date_arr.indexOf(calendar[j][i].date)
+                        if (arr_index >= 0 && calendar[j][i].class.indexOf('this') >= 0) {
                             calendar[j][i].class += ' optional'
+                            if(date_item[arr_index]){
+                                calendar[j][i].title = date_item[arr_index].title
+                            }
                         }
                     }
                 }

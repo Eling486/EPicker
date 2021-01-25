@@ -9,12 +9,12 @@
     </tr>
 {{ each calendar }}
     <tr class="calendar-row" id="{{ $index + 1 }}">
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['0'].date == selected_date}} selected{{/if}} {{ $value['0'].class }}" id="1" title="">{{ $value['0'].date }}</td>
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['1'].date == selected_date}} selected{{/if}} {{ $value['1'].class }}" id="2" title="">{{ $value['1'].date }}</td>
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['2'].date == selected_date}} selected{{/if}} {{ $value['2'].class }}" id="3" title="">{{ $value['2'].date }}</td>
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['3'].date == selected_date}} selected{{/if}} {{ $value['3'].class }}" id="4" title="">{{ $value['3'].date }}</td>
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['4'].date == selected_date}} selected{{/if}} {{ $value['4'].class }}" id="5" title="">{{ $value['4'].date }}</td>
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['5'].date == selected_date}} selected{{/if}} {{ $value['5'].class }}" id="6" title="">{{ $value['5'].date }}</td>
-        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['6'].date == selected_date}} selected{{/if}} {{ $value['6'].class }}" id="7" title="">{{ $value['6'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['0'].date == selected_date}} selected{{/if}} {{ $value['0'].class }}" id="1" title="{{ $value['0'].title }}">{{ $value['0'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['1'].date == selected_date}} selected{{/if}} {{ $value['1'].class }}" id="2" title="{{ $value['1'].title }}">{{ $value['1'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['2'].date == selected_date}} selected{{/if}} {{ $value['2'].class }}" id="3" title="{{ $value['2'].title }}">{{ $value['2'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['3'].date == selected_date}} selected{{/if}} {{ $value['3'].class }}" id="4" title="{{ $value['3'].title }}">{{ $value['3'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['4'].date == selected_date}} selected{{/if}} {{ $value['4'].class }}" id="5" title="{{ $value['4'].title }}">{{ $value['4'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['5'].date == selected_date}} selected{{/if}} {{ $value['5'].class }}" id="6" title="{{ $value['5'].title }}">{{ $value['5'].date }}</td>
+        <td class="calendar-row-{{ $index + 1 }} calendar-item{{if view_year == selected_year && view_month == selected_month && $value['6'].date == selected_date}} selected{{/if}} {{ $value['6'].class }}" id="7" title="{{ $value['6'].title }}">{{ $value['6'].date }}</td>
     </tr>
 {{ /each }}

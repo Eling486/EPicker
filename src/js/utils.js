@@ -58,14 +58,16 @@ const utils = {
                 for (var i = 0; i < view_first_weekday - 1; i++) {
                     var week_item = {
                         "date": prev_days_num - (view_first_weekday - 2 - i),
-                        "class": "prev"
+                        "class": "prev",
+                        "title": ""
                     }
                     week_arr.push(week_item)
                 }
                 for (var i = 0; i < 8 - view_first_weekday; i++) {
                     var week_item = {
                         "date": process_date + 1,
-                        "class": "this"
+                        "class": "this",
+                        "title": ""
                     }
                     week_arr.push(week_item)
                     process_date++
@@ -75,14 +77,16 @@ const utils = {
                     if (process_date < days_num) {
                         var week_item = {
                             "date": process_date + 1,
-                            "class": "this"
+                            "class": "this",
+                            "title": ""
                         }
                         week_arr.push(week_item)
                         process_date++
                     } else {
                         var week_item = {
                             "date": process_date - days_num + 1,
-                            "class": "next"
+                            "class": "next",
+                            "title": ""
                         }
                         week_arr.push(week_item)
                         process_date++
@@ -93,7 +97,8 @@ const utils = {
                 for (var i = 0; i < 7; i++) {
                     var week_item = {
                         "date": process_date - days_num + 1,
-                        "class": "next"
+                        "class": "next",
+                        "title": ""
                     }
                     week_arr.push(week_item)
                     process_date++
