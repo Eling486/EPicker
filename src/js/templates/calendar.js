@@ -14,7 +14,7 @@ class Calendar {
         var now = new Date()
         var now_str = utils.timeToStr(now)
         var now_arr = now_str.split('-')
-
+        console.log(typeof this.options.default)
         if (this.options.default) {
             if (this.options.default == 'today') {
                 var default_str = now_str
