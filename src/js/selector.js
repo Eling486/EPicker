@@ -49,6 +49,9 @@ class ESelector {
 
             this.events = new Events();
             this.theme = new Theme(this)
+            if(utils.isMobile){
+                this.template.body.classList.add('mobile')
+            }
             this.changeCalender('refresh')
             if (this.options.default) {
                 this.selectDate(this.template.selected_date)

@@ -75,6 +75,17 @@
     color: var(--eselector_txtcolor_hover);
     cursor: pointer;
   }
+
+  .eselector-body.date-selector.mobile .control-wrap button.btn.active:hover {
+    background-color: transparent;
+    color: var(--eselector_txtcolor);
+  }
+  .eselector-body.date-selector.mobile .control-wrap button.btn.active:active {
+    background-color: var(--eselector_bgcolor_hover);
+    color: var(--eselector_txtcolor_hover);
+    cursor: pointer;
+  }
+
   .eselector-body.date-selector .control-wrap button span.eselector-icon{
     display: inline-block;
     vertical-align:middle;
@@ -82,9 +93,18 @@
     height: 15px;
     color: var(--eselector_txtcolor);
   }
+
   .eselector-body.date-selector .control-wrap button.btn.active:hover span.eselector-icon{
     color: var(--eselector_bgcolor_able);
   }
+
+  .eselector-body.date-selector.mobile .control-wrap button.btn.active:hover span.eselector-icon{
+    color: var(--eselector_txtcolor);
+  }
+  .eselector-body.date-selector.mobile .control-wrap button.btn.active:active span.eselector-icon{
+    color: var(--eselector_bgcolor_able);
+  }
+
   .eselector-body.date-selector .control-wrap .text#year-month {
     display: inline-block;
     vertical-align:middle;
@@ -95,6 +115,7 @@
     text-align: center;
     margin: 3px auto;
   }
+
   .eselector-body.date-selector .calendar-content td.calendar-item,
   .eselector-body.date-selector .calendar-content td.calendar-row-title {
     display: inline-block;
@@ -104,9 +125,11 @@
     margin: 0;
     padding: 1px;
   }
+
   .eselector-body.date-selector .calendar-content td.calendar-row-title{
     background-color: var(--eselector_bgcolor);
   }
+  
   .eselector-body.date-selector .calendar-content td.calendar-item{
     background-color: var(--eselector_bgcolor_able);
   }
@@ -132,6 +155,17 @@
     color: var(--eselector_txtcolor_hover);
     cursor: pointer;
   }
+
+  .eselector-body.date-selector.mobile .calendar-content td.calendar-item.this.optional:hover {
+    background-color: var(--eselector_bgcolor_able);
+    color: var(--eselector_txtcolor_able);
+  }
+  .eselector-body.date-selector.mobile .calendar-content td.calendar-item.this.optional:active {
+    background-color: var(--eselector_bgcolor_hover);
+    color: var(--eselector_txtcolor_hover);
+    cursor: pointer;
+  }
+
 
   .eselector-body.date-selector .calendar-content td.calendar-item.this.selected {
     background-color: var(--eselector_txtcolor_able);
