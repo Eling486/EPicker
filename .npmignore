@@ -3,5 +3,5 @@ src
 webpack
 .gitignore
 postcss.config.js
-dist/index.html
+/dist/index.html
 npm-debug.log
