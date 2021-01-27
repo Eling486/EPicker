@@ -1,22 +1,29 @@
 {
   "name": "eselector",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple and beautiful selector kit",
   "main": "dist/ESelector.min.js",
+  "style": "dist/ESelector.min.css",
   "scripts": {
     "dev": "webpack --config webpack/dev.config.js",
-    "build": "webpack --config webpack/prod.config.js",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "build": "webpack --config webpack/prod.config.js"
   },
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eling486/ESelector.git"
+  },
   "keywords": [
     "selector",
     "html5"
   ],
-  "author": "Eling",
+  "bugs": {
+    "url": "https://github.com/Eling486/ESelector/issues"
+  },
+  "homepage": "https://github.com/Eling486/ESelector#readme",
+  "author": "Eling486",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -44,6 +51,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "lodash": "^4.17.20"
+
   }
 }
