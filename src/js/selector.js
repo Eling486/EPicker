@@ -38,7 +38,7 @@ class ESelector {
             if (this.options.rules.indexOf('all') >= 0 && this.options.rules !== 'all') {
                 return console.error("[ESelector]ERROR: The rule: 'all' can only be used alone.")
             }
-            if(this.options.readonly){
+            if (this.options.readonly) {
                 this.target.readOnly = true
             }
 
@@ -49,12 +49,12 @@ class ESelector {
 
             this.events = new Events();
             this.theme = new Theme(this)
-            if(utils.isMobile){
+            if (utils.isMobile) {
                 this.template.body.classList.add('mobile')
             }
             this.changeCalender('refresh')
             if (this.options.default) {
-                this.selectDate(this.template.selected_date)
+                this.selectCalender(this.template.selected_date)
             }
             this.controller = new CalendarController(this);
         }
@@ -64,11 +64,12 @@ class ESelector {
         instances.push(this);
     }
 
-    showCalendar(){
+    showCalendar() {
+        this.changeCalender('refresh')
         this.template.body.classList.add("active")
     }
 
-    hideCalendar(){
+    hideCalendar() {
         this.template.body.classList.remove("active")
     }
 
@@ -230,7 +231,7 @@ class ESelector {
                         var arr_index = date_arr.indexOf(calendar[j][i].date)
                         if (arr_index >= 0 && calendar[j][i].class.indexOf('this') >= 0) {
                             calendar[j][i].class += ' optional'
-                            if(date_item[arr_index]){
+                            if (date_item[arr_index]) {
                                 calendar[j][i].title = date_item[arr_index].title
                             }
                         }
@@ -272,7 +273,7 @@ class ESelector {
         })
     }
 
-    selectDate(target) {
+    selectCalender(target) {
         this.template.selected_year = this.template.view_year
         this.template.selected_month = this.template.view_month
         this.template.selected_date = target
@@ -289,21 +290,47 @@ class ESelector {
         this.hideCalendar()
     }
 
-    selectNone() {
-        this.template.selected_year = null
-        this.template.selected_month = null
-        this.template.selected_date = null
-        this.template.calendarContent.innerHTML = CalendarContent({
-            view_year: this.template.view_year,
-            view_month: this.template.view_month,
-            selected_year: this.template.selected_year,
-            selected_month: this.template.selected_month,
-            selected_date: this.template.selected_date,
-            calendar: this.template.calendar
-        })
-        this.target.value = ''
-        this.events.trigger('cancel');
-        this.hideCalendar();
+    cancel() {
+        if (this.options.type == 'calendar') {
+            this.template.selected_year = null
+            this.template.selected_month = null
+            this.template.selected_date = null
+            this.template.calendarContent.innerHTML = CalendarContent({
+                view_year: this.template.view_year,
+                view_month: this.template.view_month,
+                selected_year: this.template.selected_year,
+                selected_month: this.template.selected_month,
+                selected_date: this.template.selected_date,
+                calendar: this.template.calendar
+            })
+            this.target.value = ''
+            this.events.trigger('cancel');
+            this.hideCalendar();
+        }
+    }
+
+    select(target) {
+        if (this.options.type == 'calendar') {
+            if (typeof target == 'undefined') {
+                return console.warn(`[ESelector]TIPS: es.select(target); target is a time string or a Date()`)
+            } else if (typeof target == 'string') {
+                if (target.split('-').length === 3) {
+                    var target_date = utils.strToTime(target)
+                } else {
+                    return console.error(`[ESelector]ERROR: The target: '${target}' is not allowed!`)
+                }
+            } else if (typeof target == 'object') {
+                var target_date = target
+            } else {
+                return console.error(`[ESelector]ERROR: The target: '${target}'(${typeof target}) is not allowed!`)
+            }
+            var target_date_arr = utils.timeToStr(target_date).split('-')
+            target_date.setDate(1)
+            this.template.viewDate = target_date
+            this.template.view_year = target_date_arr[0]
+            this.template.view_month = target_date_arr[1]
+            this.selectCalender(parseInt(target_date_arr[2]))
+        }
     }
 
     /**

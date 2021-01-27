@@ -55,14 +55,14 @@ class Controller {
     }
     initCancelButton() {
         this.selector.template.cancelButton.addEventListener('click', () => {
-            this.selector.selectNone();
+            this.selector.cancel();
         });
     }
 
     initCalendarItems() {
         this.selector.template.calendarContent.addEventListener('click', (e) => {
             if(e.target.classList.contains('this') && e.target.classList.contains('optional') ){
-                this.selector.selectDate(e.target.innerHTML)
+                this.selector.selectCalender(e.target.innerHTML)
             }
             if(e.target.classList.contains('prev') && this.selector.template.control.prev_month == true){
                 this.selector.changeCalender('prevMonth', this.options);
