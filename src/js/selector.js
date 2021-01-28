@@ -24,9 +24,10 @@ class ESelector {
         if (this.options.type == 'calendar') {
             var rules = this.options.rules.split(' ')
             var rules_allow = ['all', 'future', 'past', 'weekday', 'fromData']
+
             for (var i = 0; i < rules.length; i++) {
                 if (rules_allow.indexOf(rules[i]) < 0) {
-                    return console.error("[ESelector]ERROR: The rule: '" + rules[i] + "' is not allowed!")
+                    return console.error(`[ESelector]ERROR: The rule: '${rules[i]}' is not allowed!`)
                 }
             }
             if (this.options.rules.indexOf('future') >= 0 && this.options.rules.indexOf('past') >= 0) {
@@ -38,6 +39,13 @@ class ESelector {
             if (this.options.rules.indexOf('all') >= 0 && this.options.rules !== 'all') {
                 return console.error("[ESelector]ERROR: The rule: 'all' can only be used alone.")
             }
+            if (this.options.target.tagName !== 'INPUT') {
+                return console.error("[ESelector]ERROR: The 'target' should be a <input>.")
+            }
+            if (!this.options.rules_data && (this.options.rules.indexOf('weekday') >= 0 || this.options.rules.indexOf('fromData') >= 0)) {
+                return console.error("[ESelector]ERROR: Missing option: 'rules_data'.(If you want to use the rules: 'weekday' or 'fromData', you need to specify the 'rules_data')")
+            }
+
             if (this.options.readonly) {
                 this.target.readOnly = true
             }
@@ -52,20 +60,18 @@ class ESelector {
             if (utils.isMobile) {
                 this.template.body.classList.add('mobile')
             }
-            this.changeCalender('refresh')
+            this.changeCalender(0)
             if (this.options.default) {
                 this.selectCalender(this.template.selected_date)
             }
             this.controller = new CalendarController(this);
         }
 
-        this.events = new Events();
-
         instances.push(this);
     }
 
     showCalendar() {
-        this.changeCalender('refresh')
+        this.changeCalender(0)
         this.template.body.classList.add("active")
     }
 
@@ -77,63 +83,58 @@ class ESelector {
         var viewDate = this.template.viewDate
         var nowDate = new Date()
         nowDate.setDate(1)
-        if (order == 'prevMonth') {
+        if (order === -1) { //prevMonth
             var targetDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1)
             if (this.options.rules.indexOf('future') >= 0 && targetDate <= nowDate) {
                 targetDate = nowDate
             }
         }
-        if (order == 'nextMonth') {
+        if (order === 1) { //nextMonth
             var targetDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1)
             if (this.options.rules.indexOf('past') >= 0 && targetDate >= nowDate) {
                 targetDate = nowDate
             }
         }
-        if (order == 'prevYear') {
+        if (order === -12) { //prevYear
             var targetDate = new Date(viewDate.getFullYear() - 1, viewDate.getMonth(), 1)
             if (this.options.rules.indexOf('future') >= 0 && targetDate <= nowDate) {
                 targetDate = nowDate
             }
         }
-        if (order == 'nextYear') {
+        if (order === 12) { //nextYear
             var targetDate = new Date(viewDate.getFullYear() + 1, viewDate.getMonth(), 1)
             if (this.options.rules.indexOf('past') >= 0 && targetDate >= nowDate) {
                 targetDate = nowDate
             }
         }
-        if (order == 'refresh') {
+        if (order === 0) { //refresh
             var targetDate = this.template.viewDate
         }
         var calendar = utils.getCalendar(targetDate)
 
         if (this.options.rules.indexOf('weekday') >= 0) {
-            if (this.options.rules_data !== null) {
-                var firstDay = targetDate
-                firstDay.setDate(1)
-                var weekday_first = firstDay.getDay()
-                if (weekday_first == 0) {
-                    weekday_first = 7
+            var firstDay = targetDate
+            firstDay.setDate(1)
+            var weekday_first = firstDay.getDay()
+            if (weekday_first == 0) {
+                weekday_first = 7
+            }
+            for (var k = 0; k < this.options.rules_data.length; k++) {
+                if (this.options.rules_data[k] > 7 || this.options.rules_data[k] < 1) {
+                    return console.error("[ESelector]ERROR: The elements in the 'rules_data'(array) should be between 1 and 7.")
                 }
-                for (var k = 0; k < this.options.rules_data.length; k++) {
-                    if (this.options.rules_data[k] > 7 || this.options.rules_data[k] < 1) {
-                        return console.error("[ESelector]ERROR: The elements in the 'rules_data'(array) should be between 1 and 7.")
-                    }
-                    var weekday = this.options.rules_data[k]
-                    var date_constant = 36 + (weekday - weekday_first)
-                    for (var j = 0; j < calendar.length; j++) {
-                        for (var i = 0; i < calendar[j].length; i++) {
-                            if ((date_constant - calendar[j][i].date) % 7 == 0 && calendar[j][i].class.indexOf('this') >= 0) {
-                                calendar[j][i].class += ' optional'
-                            }
+                var weekday = this.options.rules_data[k]
+                var date_constant = 36 + (weekday - weekday_first)
+                for (var j = 0; j < calendar.length; j++) {
+                    for (var i = 0; i < calendar[j].length; i++) {
+                        if ((date_constant - calendar[j][i].date) % 7 == 0 && calendar[j][i].class.indexOf('this') >= 0) {
+                            calendar[j][i].class += ' optional'
                         }
                     }
                 }
-                if (this.options.rules_data.length == 0) {
-                    console.warn("[ESelector]WARNING: The 'rules_data'(array) is empty.")
-                }
-            } else {
-                console.error("[ESelector]ERROR: Missing parameter: 'rules_data'.(If you want to use the rule: 'weekday', you need to specify the 'rules_data')")
-                this.options.rules = 'all'
+            }
+            if (this.options.rules_data.length == 0) {
+                console.warn("[ESelector]WARNING: The 'rules_data'(array) is empty.")
             }
         }
         if (this.options.rules.indexOf('future') >= 0) {
@@ -215,34 +216,29 @@ class ESelector {
         }
 
         if (this.options.rules == 'fromData') {
-            if (this.options.rules_data !== null) {
-                var target_arr = utils.timeToStr(targetDate).split('-')
-                var date_arr = []
-                var date_item = []
-                for (var i = 0; i < this.options.rules_data.length; i++) {
-                    var data_arr = this.options.rules_data[i].date.split('-')
-                    if (parseInt(data_arr[0]) == target_arr[0] && parseInt(data_arr[1]) == target_arr[1]) {
-                        date_arr.push(parseInt(data_arr[2]))
-                        date_item.push(this.options.rules_data[i])
-                    }
+            var target_arr = utils.timeToStr(targetDate).split('-')
+            var date_arr = []
+            var date_item = []
+            for (var i = 0; i < this.options.rules_data.length; i++) {
+                var data_arr = this.options.rules_data[i].date.split('-')
+                if (parseInt(data_arr[0]) == target_arr[0] && parseInt(data_arr[1]) == target_arr[1]) {
+                    date_arr.push(parseInt(data_arr[2]))
+                    date_item.push(this.options.rules_data[i])
                 }
-                for (var j = 0; j < calendar.length; j++) {
-                    for (var i = 0; i < calendar[j].length; i++) {
-                        var arr_index = date_arr.indexOf(calendar[j][i].date)
-                        if (arr_index >= 0 && calendar[j][i].class.indexOf('this') >= 0) {
-                            calendar[j][i].class += ' optional'
-                            if (date_item[arr_index]) {
-                                calendar[j][i].title = date_item[arr_index].title
-                            }
+            }
+            for (var j = 0; j < calendar.length; j++) {
+                for (var i = 0; i < calendar[j].length; i++) {
+                    var arr_index = date_arr.indexOf(calendar[j][i].date)
+                    if (arr_index >= 0 && calendar[j][i].class.indexOf('this') >= 0) {
+                        calendar[j][i].class += ' optional'
+                        if (date_item[arr_index]) {
+                            calendar[j][i].title = date_item[arr_index].title
                         }
                     }
                 }
-                if (this.options.rules_data.length == 0) {
-                    console.warn("[ESelector]WARNING: The 'rules_data'(array) is empty.")
-                }
-            } else {
-                console.error("[ESelector]ERROR: Missing parameter: 'rules_data'.(If you want to use the rule: 'fromData', you need to specify the 'rules_data')")
-                this.options.rules = 'all'
+            }
+            if (this.options.rules_data.length == 0) {
+                console.warn("[ESelector]WARNING: The 'rules_data'(array) is empty.")
             }
         }
 
@@ -255,7 +251,6 @@ class ESelector {
                 }
             }
         }
-
 
         this.template.viewDate = targetDate
         var view_arr = utils.timeToStr(targetDate).split('-')

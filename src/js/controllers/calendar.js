@@ -25,7 +25,7 @@ class Controller {
     initNextMonthButton() {
         this.selector.template.nextMonthButton.addEventListener('click', () => {
             if(this.selector.template.control.next_month == true){
-                this.selector.changeCalender('nextMonth');
+                this.selector.changeCalender(1);
             }
         });
     }
@@ -33,7 +33,7 @@ class Controller {
     initNextYearButton() {
         this.selector.template.nextYearButton.addEventListener('click', () => {
             if(this.selector.template.control.next_year == true){
-                this.selector.changeCalender('nextYear');
+                this.selector.changeCalender(12);
             }
         });
     }
@@ -41,7 +41,7 @@ class Controller {
     initPrevMonthButton() {
         this.selector.template.prevMonthButton.addEventListener('click', () => {
             if(this.selector.template.control.prev_month == true){
-                this.selector.changeCalender('prevMonth');
+                this.selector.changeCalender(-1);
             }
         });
     }
@@ -49,7 +49,7 @@ class Controller {
     initPrevYearButton() {
         this.selector.template.prevYearButton.addEventListener('click', () => {
             if(this.selector.template.control.prev_year == true){
-                this.selector.changeCalender('prevYear');
+                this.selector.changeCalender(-12);
             }
         });
     }
@@ -65,10 +65,10 @@ class Controller {
                 this.selector.selectCalender(e.target.innerHTML)
             }
             if(e.target.classList.contains('prev') && this.selector.template.control.prev_month == true){
-                this.selector.changeCalender('prevMonth', this.options);
+                this.selector.changeCalender(-1, this.options);
             }
             if(e.target.classList.contains('next') && this.selector.template.control.next_month == true){
-                this.selector.changeCalender('nextMonth', this.options);
+                this.selector.changeCalender(1, this.options);
             }
         });
     }
