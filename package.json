@@ -1,9 +1,9 @@
 {
-  "name": "eselector",
+  "name": "epicker",
   "version": "1.0.0",
   "description": "A simple and beautiful selector kit",
-  "main": "dist/ESelector.min.js",
-  "style": "dist/ESelector.min.css",
+  "main": "dist/EPicker.min.js",
+  "style": "dist/EPicker.min.css",
   "scripts": {
     "dev": "webpack --config webpack/dev.config.js",
     "build": "webpack --config webpack/prod.config.js"
@@ -13,16 +13,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Eling486/ESelector.git"
+    "url": "git+https://github.com/Eling486/EPicker.git"
   },
   "keywords": [
     "selector",
     "html5"
   ],
   "bugs": {
-    "url": "https://github.com/Eling486/ESelector/issues"
+    "url": "https://github.com/Eling486/EPicker/issues"
   },
-  "homepage": "https://github.com/Eling486/ESelector#readme",
+  "homepage": "https://github.com/Eling486/EPicker#readme",
   "author": "Eling486",
   "license": "MIT",
   "devDependencies": {

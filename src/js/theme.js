@@ -48,7 +48,7 @@ class Theme {
             if (this.ALLOWED_THEME.indexOf(this.theme) >= 0) {
                 var theme_data = this.THEME_LIST[this.theme]
                 for (const item in theme_data) {
-                    this.body.style.setProperty('--eselector_' + item, theme_data[item]);
+                    this.body.style.setProperty('--epicker_' + item, theme_data[item]);
                 }
             }
         }
@@ -59,7 +59,7 @@ class Theme {
                 }
             }
             for (const item in this.theme) {
-                this.body.style.setProperty('--eselector_' + item, this.theme[item]);
+                this.body.style.setProperty('--epicker_' + item, this.theme[item]);
             }
         }
     }

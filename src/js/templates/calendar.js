@@ -21,12 +21,12 @@ class Calendar {
                 }else if(this.options.default.split('-').length === 3){
                     var option_default = utils.strToTime(this.options.default)
                 }else{
-                    return console.error(`[ESelector]ERROR: '${this.options.default}' is not allowed!`)
+                    return console.error(`[EPicker]ERROR: '${this.options.default}' is not allowed!`)
                 }
             }else if(typeof this.options.default == 'object'){
                 var option_default = this.options.default
             }else{
-                return console.error(`[ESelector]ERROR: '${this.options.default}' is not allowed!`)
+                return console.error(`[EPicker]ERROR: '${this.options.default}' is not allowed!`)
             }
             var default_str = utils.timeToStr(option_default)
             var default_fill = default_str.split('-')
@@ -34,14 +34,14 @@ class Calendar {
                 if (option_default.getTime() < now.getTime()) {
                     var default_str = now_str
                     var default_fill = now_arr
-                    console.error(`[ESelector]WARNING: '${this.options.default}' is earlier than today!`)
+                    console.error(`[EPicker]WARNING: '${this.options.default}' is earlier than today!`)
                 }
             }
             if (this.options.rules.indexOf('past') >= 0) {
                 if (option_default.getTime() > now.getTime()) {
                     var default_str = now_str
                     var default_fill = now_arr
-                    console.error(`[ESelector]WARNING: '${this.options.default}' is later than today!`)
+                    console.error(`[EPicker]WARNING: '${this.options.default}' is later than today!`)
                 }
             }
             this.selected_year = default_fill[0]
@@ -82,7 +82,7 @@ class Calendar {
             calendar: this.calendar
         });
 
-        this.body = this.container.querySelector('.eselector-body');
+        this.body = this.container.querySelector('.epicker-body');
         this.ViewInfo = this.container.querySelector('.control-wrap .text');
         this.prevYearButton = this.container.querySelector('.prev-year');
         this.prevMonthButton = this.container.querySelector('.prev-month');

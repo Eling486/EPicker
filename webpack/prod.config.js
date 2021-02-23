@@ -8,7 +8,7 @@ const cssnano = require('cssnano');
 module.exports = {
     mode: 'production',
     entry: {
-        ESelector: './src/js/index.js',
+        EPicker: './src/js/index.js',
     },
     output: {
         path: path.resolve(__dirname, '..', 'dist'),

@@ -9,9 +9,9 @@ import Theme from './theme';
 
 const instances = [];
 
-class ESelector {
+class EPicker {
     /**
-     * ESelector constructor function
+     * EPicker constructor function
      *
      * @param {Object} options - See README
      * @constructor
@@ -27,23 +27,23 @@ class ESelector {
 
             for (var i = 0; i < rules.length; i++) {
                 if (rules_allow.indexOf(rules[i]) < 0) {
-                    return console.error(`[ESelector]ERROR: The rule: '${rules[i]}' is not allowed!`)
+                    return console.error(`[EPicker]ERROR: The rule: '${rules[i]}' is not allowed!`)
                 }
             }
             if (this.options.rules.indexOf('future') >= 0 && this.options.rules.indexOf('past') >= 0) {
-                return console.error("[ESelector]ERROR: The rules: 'future' and 'past' cannot be used at the same time.")
+                return console.error("[EPicker]ERROR: The rules: 'future' and 'past' cannot be used at the same time.")
             }
             if (this.options.rules.indexOf('fromData') >= 0 && this.options.rules !== 'fromData') {
-                return console.error("[ESelector]ERROR: The rule: 'fromData' can only be used alone.")
+                return console.error("[EPicker]ERROR: The rule: 'fromData' can only be used alone.")
             }
             if (this.options.rules.indexOf('all') >= 0 && this.options.rules !== 'all') {
-                return console.error("[ESelector]ERROR: The rule: 'all' can only be used alone.")
+                return console.error("[EPicker]ERROR: The rule: 'all' can only be used alone.")
             }
             if (this.options.target.tagName !== 'INPUT') {
-                return console.error("[ESelector]ERROR: The 'target' should be a <input>.")
+                return console.error("[EPicker]ERROR: The 'target' should be a <input>.")
             }
             if (!this.options.rules_data && (this.options.rules.indexOf('weekday') >= 0 || this.options.rules.indexOf('fromData') >= 0)) {
-                return console.error("[ESelector]ERROR: Missing option: 'rules_data'.(If you want to use the rules: 'weekday' or 'fromData', you need to specify the 'rules_data')")
+                return console.error("[EPicker]ERROR: Missing option: 'rules_data'.(If you want to use the rules: 'weekday' or 'fromData', you need to specify the 'rules_data')")
             }
 
             if (this.options.readonly) {
@@ -121,7 +121,7 @@ class ESelector {
             }
             for (var k = 0; k < this.options.rules_data.length; k++) {
                 if (this.options.rules_data[k] > 7 || this.options.rules_data[k] < 1) {
-                    return console.error("[ESelector]ERROR: The elements in the 'rules_data'(array) should be between 1 and 7.")
+                    return console.error("[EPicker]ERROR: The elements in the 'rules_data'(array) should be between 1 and 7.")
                 }
                 var weekday = this.options.rules_data[k]
                 var date_constant = 36 + (weekday - weekday_first)
@@ -134,7 +134,7 @@ class ESelector {
                 }
             }
             if (this.options.rules_data.length == 0) {
-                console.warn("[ESelector]WARNING: The 'rules_data'(array) is empty.")
+                console.warn("[EPicker]WARNING: The 'rules_data'(array) is empty.")
             }
         }
         if (this.options.rules.indexOf('future') >= 0) {
@@ -238,7 +238,7 @@ class ESelector {
                 }
             }
             if (this.options.rules_data.length == 0) {
-                console.warn("[ESelector]WARNING: The 'rules_data'(array) is empty.")
+                console.warn("[EPicker]WARNING: The 'rules_data'(array) is empty.")
             }
         }
 
@@ -307,17 +307,17 @@ class ESelector {
     select(target) {
         if (this.options.type == 'calendar') {
             if (typeof target == 'undefined') {
-                return console.warn(`[ESelector]TIPS: es.select(target); target is a time string or a Date()`)
+                return console.warn(`[EPicker]TIPS: es.select(target); target is a time string or a Date()`)
             } else if (typeof target == 'string') {
                 if (target.split('-').length === 3) {
                     var target_date = utils.strToTime(target)
                 } else {
-                    return console.error(`[ESelector]ERROR: The target: '${target}' is not allowed!`)
+                    return console.error(`[EPicker]ERROR: The target: '${target}' is not allowed!`)
                 }
             } else if (typeof target == 'object') {
                 var target_date = target
             } else {
-                return console.error(`[ESelector]ERROR: The target: '${target}'(${typeof target}) is not allowed!`)
+                return console.error(`[EPicker]ERROR: The target: '${target}'(${typeof target}) is not allowed!`)
             }
             var target_date_arr = utils.timeToStr(target_date).split('-')
             target_date.setDate(1)
@@ -351,4 +351,4 @@ class ESelector {
 }
 
 
-export default ESelector;
+export default EPicker;

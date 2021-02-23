@@ -1,30 +1,30 @@
-<h1 align="center">ESelector</h1>
+<h1 align="center">EPicker</h1>
 
 > A simple and beautiful selector
 
 ## Introduction
 
-ESelector is a simple and beautiful selector kit
+EPicker is a simple and beautiful selector kit
 
-**[Docs](https://eselector.js.org)**
+**[Docs](https://epicker.js.org)**
 
-**[中文文档](https://eselector.js.org/#/zh-Hans/)**
+**[中文文档](https://epicker.js.org/#/zh-Hans/)**
 
 ## Quick Start
 
 ```html
-<link rel="stylesheet" type="text/css" href="ESelector.min.css" />
+<link rel="stylesheet" type="text/css" href="EPicker.min.css" />
 <div class="input-wrap">
-    <input id="eselector-target" type="text">
-    <div id="eselector"></div>
+    <input id="epicker-target" type="text">
+    <div id="epicker"></div>
 </div>
-<script src="ESelector.min.js"></script>
+<script src="EPicker.min.js"></script>
 ```
 
 ```js
-const es = new ESelector({
-    container: document.getElementById('eselector'),
-    target: document.getElementById('eselector-target')
+const es = new EPicker({
+    container: document.getElementById('epicker'),
+    target: document.getElementById('epicker-target')
 });
 ```
 
@@ -42,7 +42,7 @@ This project exists thanks to all the people who contribute.
 
 ## Donate
 
-ESelector is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
+EPicker is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
 ## One-time Donations
 
@@ -53,7 +53,7 @@ We accept donations through these channels:
 
 # Author
 
-**ESelector** © [Eling486](https://github.com/Eling486), Released under the [MIT](./LICENSE) License.<br>
-Authored and maintained by Eling486 with help from contributors ([list](https://github.com/Eling486/ESelector/contributors)).
+**EPicker** © [Eling486](https://github.com/Eling486), Released under the [MIT](./LICENSE) License.<br>
+Authored and maintained by Eling486 with help from contributors ([list](https://github.com/Eling486/EPicker/contributors)).
 
-> [Blog](https://elingweb.com) · GitHub [@Eling486](https://github.com/Eling486)
+> [Blog](https://blog.elingweb.com) · GitHub [@Eling486](https://github.com/Eling486)

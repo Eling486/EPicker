@@ -8,7 +8,7 @@ module.exports = {
   mode: 'development',
   watch: true,
   entry: {
-    ESelector: './src/js/index.js',
+    EPicker: './src/js/index.js',
   },
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
